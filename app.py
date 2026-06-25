@@ -39,8 +39,18 @@ def init_db():
 # tocar este archivo: el evento se registra solo.
 
 @app.route("/")
-def index():
-    return render_template("index.html")
+def landing():
+    return render_template("landing.html")
+
+
+@app.route("/usuario")
+def usuario():
+    return render_template("usuario.html")
+
+
+@app.route("/experto")
+def experto():
+    return render_template("experto.html")
 
 
 @app.route("/api/track", methods=["POST"])
