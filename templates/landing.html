@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ContiGO — Hacemos tus trámites más simples, juntos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="landing-body">
+
+<div class="landing-hero">
+  <img src="{{ url_for('static', filename='img/portada.png') }}" alt="ContiGO" class="landing-hero-img">
+</div>
+
+<main class="landing-main">
+  <div class="landing-intro">
+    <h2>¿Cómo quieres entrar?</h2>
+    <p>Elige el perfil que mejor te describe. Puedes crear los dos si quieres probar ambas experiencias.</p>
+  </div>
+
+  <div class="role-grid">
+
+    <div class="role-card" data-track="click_rol_usuario" onclick="openRegister('usuario')">
+      <div class="role-icon" style="background:#eef0ff; color:#5b4fe3;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/></svg>
+      </div>
+      <h3>Soy persona natural</h3>
+      <p>Busco ayuda para completar un trámite: licencias, RUC, visas, certificados y más.</p>
+      <button class="btn-primary" style="width:100%; justify-content:center;">Ingresar como usuario</button>
+    </div>
+
+    <div class="role-card" data-track="click_rol_experto" onclick="openRegister('experto')">
+      <div class="role-icon" style="background:#e8f7ee; color:#16a34a;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+      </div>
+      <h3>Soy experto / asesor</h3>
+      <p>Abogado, contador, economista o auditor. Quiero ofrecer mis servicios y ayudar con trámites.</p>
+      <button class="btn-primary" style="width:100%; justify-content:center; background:#16a34a;">Crear perfil de experto</button>
+    </div>
+
+  </div>
+</main>
+
+<!-- MODAL Y TOAST -->
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this) closeModal()">
+  <div class="modal-box" id="modalBox"></div>
+</div>
+<div id="toast" class="toast"></div>
+
+<script src="{{ url_for('static', filename='js/tracking.js') }}"></script>
+<script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+</body>
+</html>

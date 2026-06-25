@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ContiGO — Panel de experto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark">CG</div>
+    <div class="brand-text">
+      <div class="name">Conti<span>GO</span></div>
+      <div class="tagline">Panel de experto / asesor</div>
+    </div>
+  </div>
+  <nav class="nav-links">
+    <a href="#" class="active">Mi panel</a>
+    <a href="#servicios">Mis servicios</a>
+    <a href="#solicitudes">Solicitudes</a>
+    <a href="#reputacion">Reputación</a>
+  </nav>
+  <div class="topbar-right">
+    <div class="user-pill">
+      <div class="avatar-sm" id="topAvatar">EX</div>
+      <span id="topGreeting">Hola, Experto</span>
+    </div>
+    <a href="/" class="icon-btn" title="Volver al inicio" data-track="click_volver_inicio" style="text-decoration:none;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1e1b2e" stroke-width="2"><path d="M9 21V12H15V21M3 10L12 3L21 10"/></svg>
+    </a>
+  </div>
+</header>
+
+<div class="layout">
+  <!-- MAIN COLUMN -->
+  <main>
+
+    <!-- BIENVENIDA -->
+    <section class="card hero" style="grid-template-columns:1fr;">
+      <div class="hero-copy">
+        <h1 style="font-size:28px;">Bienvenido a tu panel, <span class="accent" id="welcomeName">Experto</span></h1>
+        <p>Publica tus servicios para que las personas que buscan ayuda con un trámite te encuentren primero.</p>
+        <button class="btn-primary" data-track="click_ofertar_servicio" onclick="openServiceForm()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+          Ofertar un servicio
+        </button>
+      </div>
+    </section>
+
+    <!-- MIS SERVICIOS -->
+    <section class="card section" id="servicios">
+      <div class="section-head">
+        <h2>Mis servicios publicados</h2>
+        <a href="#" data-track="click_ofertar_servicio_2" onclick="openServiceForm(); return false;">+ Nuevo servicio</a>
+      </div>
+      <div id="serviceGrid" class="pro-grid">
+        <!-- se llena dinámicamente desde experto.js -->
+      </div>
+    </section>
+
+    <!-- SOLICITUDES RECIBIDAS -->
+    <section class="card section" id="solicitudes">
+      <div class="section-head">
+        <h2>Solicitudes recibidas</h2>
+        <span class="tag">Simuladas para la prueba</span>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:12px;">
+
+        <div class="lead-card">
+          <div class="pro-avatar" style="background:#5b4fe3; width:38px; height:38px; font-size:13px;">CR</div>
+          <div style="flex:1;">
+            <div class="lead-name">Carlos Ramírez</div>
+            <div class="lead-desc">"Necesito renovar mi licencia tipo B antes de fin de mes, ¿me puedes ayudar?"</div>
+            <button class="btn-outline" style="width:auto; padding:7px 16px;" data-track="click_responder_solicitud" onclick="openLeadChat('Carlos Ramírez')">Responder</button>
+          </div>
+        </div>
+
+        <div class="lead-card">
+          <div class="pro-avatar" style="background:#ec4899; width:38px; height:38px; font-size:13px;">VS</div>
+          <div style="flex:1;">
+            <div class="lead-name">Valeria Suárez</div>
+            <div class="lead-desc">"Quiero saber qué documentos necesito para sacar mi RUC por primera vez."</div>
+            <button class="btn-outline" style="width:auto; padding:7px 16px;" data-track="click_responder_solicitud" onclick="openLeadChat('Valeria Suárez')">Responder</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- REPUTACIÓN -->
+    <section class="card section" id="reputacion">
+      <div class="section-head">
+        <h2>Tu reputación</h2>
+        <span class="tag">Vista previa de ejemplo</span>
+      </div>
+      <p style="font-size:13px; color:var(--text-muted); margin-top:-6px;">
+        Tu perfil es nuevo, así que todavía no tienes reseñas reales. Así se verá esta sección
+        cuando empieces a completar trámites con usuarios:
+      </p>
+      <div class="rating-block">
+        <div class="rating-big">4.8</div>
+        <div>
+          <div class="pro-rating" style="margin:0;">⭐⭐⭐⭐⭐ <span style="color:var(--text-muted);">(ejemplo, 32 reseñas)</span></div>
+          <div class="review-item">
+            <div class="stars">★★★★★</div>
+            "Resolvió mi trámite en menos de lo que esperaba, muy claro explicando cada paso." — usuario de ejemplo
+          </div>
+          <div class="review-item">
+            <div class="stars">★★★★☆</div>
+            "Buena comunicación, aunque tardó un poco en responder al inicio." — usuario de ejemplo
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <div class="card">
+      <div class="profile-box">
+        <div class="profile-avatar" id="profAvatar">EX</div>
+        <div>
+          <div class="profile-name" id="profName">Tu nombre</div>
+          <div class="profile-email" id="profRole">Profesión</div>
+        </div>
+      </div>
+      <span class="badge-pill badge-pending" id="verifyBadge">⏳ Título en revisión</span>
+
+      <div style="margin-top:16px;">
+        <div style="font-size:12.5px; font-weight:600;">Perfil completo: <span id="completePct">60%</span></div>
+        <div class="progress-track"><div class="progress-fill" id="completeFill" style="width:60%;"></div></div>
+        <div style="font-size:12px; color:var(--text-muted); margin-top:4px;">Publica tu primer servicio para llegar a 100%.</div>
+      </div>
+    </div>
+
+    <div class="card help-card">
+      <h3>¿Cómo te va con ContiGO?</h3>
+      <p>Tu opinión nos ayuda a mejorar esta primera versión.</p>
+      <button class="btn-primary" style="width:100%; justify-content:center;" data-track="click_dar_feedback_experto" onclick="showToast('¡Gracias! Tu feedback fue registrado.')">
+        Dejar comentario
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="secure-row">
+        <div class="menu-icon" style="background:#e8f7ee; color:#16a34a;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/></svg>
+        </div>
+        <div><div class="menu-title">Verificación de identidad</div><div class="menu-sub">Tu título y datos solo los revisa el equipo de ContiGO.</div></div>
+      </div>
+    </div>
+
+  </aside>
+</div>
+
+<!-- MODAL Y TOAST -->
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this) closeModal()">
+  <div class="modal-box" id="modalBox"></div>
+</div>
+<div id="toast" class="toast"></div>
+
+<script src="{{ url_for('static', filename='js/session.js') }}"></script>
+<script src="{{ url_for('static', filename='js/tracking.js') }}"></script>
+<script src="{{ url_for('static', filename='js/experto.js') }}"></script>
+</body>
+</html>

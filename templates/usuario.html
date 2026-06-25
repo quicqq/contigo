@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ContiGO — Conectamos personas, simplificamos trámites</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark">CG</div>
+    <div class="brand-text">
+      <div class="name">Conti<span>GO</span></div>
+      <div class="tagline">Conectamos personas, simplificamos trámites.</div>
+    </div>
+  </div>
+  <nav class="nav-links">
+    <a href="#" class="active">Inicio</a>
+    <a href="#videos">Trámites frecuentes</a>
+    <a href="#profesionales">Profesionales</a>
+    <a href="#" data-track="click_como_funciona">Cómo funciona</a>
+    <a href="#" data-track="click_blog">Blog</a>
+  </nav>
+  <div class="topbar-right">
+    <button class="icon-btn" data-track="click_notificaciones" aria-label="Notificaciones" onclick="openNotifications()">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1e1b2e" stroke-width="2"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+      <span class="badge"></span>
+    </button>
+    <button class="icon-btn" data-track="click_mensajes" aria-label="Mensajes" onclick="openMessages()">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1e1b2e" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </button>
+    <div class="user-pill">
+      <div class="avatar-sm" id="topAvatar">CR</div>
+      <span id="topGreeting">Hola, Carlos</span>
+    </div>
+    <a href="/" class="icon-btn" title="Volver al inicio" data-track="click_volver_inicio" style="text-decoration:none;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1e1b2e" stroke-width="2"><path d="M9 21V12H15V21M3 10L12 3L21 10"/></svg>
+    </a>
+  </div>
+</header>
+
+<div class="layout">
+  <!-- MAIN COLUMN -->
+  <main>
+
+    <!-- HERO -->
+    <section class="card hero">
+      <div class="hero-copy">
+        <h1>Hacemos tus trámites <span class="accent">más simples, juntos.</span></h1>
+        <p>Conecta con profesionales verificados que te ayudan a realizar cualquier trámite, en todo momento.</p>
+        <div class="search-row">
+          <input type="text" id="searchInput" placeholder="¿Qué trámite necesitas realizar?" data-track="usa_buscador" onkeydown="if(event.key==='Enter') runSearch()" />
+          <button class="btn-primary" data-track="click_buscar" onclick="runSearch()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            Buscar
+          </button>
+        </div>
+        <div class="popular">
+          Búsquedas populares:
+          <span class="chip" data-track="click_busqueda_popular" data-track-label="Licencia de conducción" onclick="quickSearch('licencia de conducción')">Licencia de conducción</span>
+          <span class="chip" data-track="click_busqueda_popular" data-track-label="Pensión" onclick="quickSearch('pensión')">Pensión</span>
+          <span class="chip" data-track="click_busqueda_popular" data-track-label="RUC" onclick="quickSearch('ruc')">RUC</span>
+          <span class="chip" data-track="click_busqueda_popular" data-track-label="Visa" onclick="quickSearch('visa')">Visa</span>
+        </div>
+        <div id="searchBanner" class="search-banner" style="display:none;"></div>
+      </div>
+      <div class="hero-illustration">
+        <svg viewBox="0 0 320 260" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="160" cy="130" r="115" fill="#eef0ff"/>
+          <rect x="40" y="150" width="60" height="80" rx="10" fill="#5b4fe3"/>
+          <circle cx="70" cy="120" r="26" fill="#ffd9b3"/>
+          <rect x="210" y="140" width="70" height="90" rx="10" fill="#1e1b2e"/>
+          <circle cx="245" cy="110" r="26" fill="#ffd9b3"/>
+          <circle cx="150" cy="80" r="22" fill="white" stroke="#16a34a" stroke-width="3"/>
+          <path d="M141 80l6 6 11-13" stroke="#16a34a" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <rect x="186" y="36" width="34" height="34" rx="17" fill="#5b4fe3"/>
+          <path d="M198 47h10M198 53h10M198 59h6" stroke="white" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- VIDEOS -->
+    <section class="card section" id="videos">
+      <div class="section-head">
+        <h2>Trámites frecuentes</h2>
+        <a href="#" data-track="click_ver_todos_videos">Ver todos los trámites</a>
+      </div>
+      <div class="video-grid">
+
+        <div class="video-card" data-track="click_video" data-track-label="Cómo sacar el RUC"
+             data-keywords="ruc,sri,impuestos,contribuyente" onclick="openVideoModal('ruc')">
+          <div class="video-thumb" style="background: linear-gradient(135deg,#5b4fe3,#8b7ff0);">
+            <span class="duration">4:35</span>
+            <div class="play-btn"><svg viewBox="0 0 24 24" fill="#5b4fe3"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+          <div class="video-info">
+            <div class="title">Cómo sacar el RUC</div>
+            <div class="desc">Aprende paso a paso cómo obtener tu RUC por primera vez.</div>
+            <span class="tag">SRI</span>
+          </div>
+        </div>
+
+        <div class="video-card" data-track="click_video" data-track-label="Renovar licencia de conducción"
+             data-keywords="licencia,conducción,tránsito,manejar" onclick="openVideoModal('licencia')">
+          <div class="video-thumb" style="background: linear-gradient(135deg,#1e1b2e,#3f3a55);">
+            <span class="duration">6:12</span>
+            <div class="play-btn"><svg viewBox="0 0 24 24" fill="#1e1b2e"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+          <div class="video-info">
+            <div class="title">Renovar licencia de conducción</div>
+            <div class="desc">Tutorial completo para renovar tu licencia de conducción.</div>
+            <span class="tag">Tránsito</span>
+          </div>
+        </div>
+
+        <div class="video-card" data-track="click_video" data-track-label="Certificado de antecedentes"
+             data-keywords="certificado,antecedentes,penales,policía" onclick="openVideoModal('antecedentes')">
+          <div class="video-thumb" style="background: linear-gradient(135deg,#16a34a,#4ade80);">
+            <span class="duration">5:08</span>
+            <div class="play-btn"><svg viewBox="0 0 24 24" fill="#16a34a"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+          <div class="video-info">
+            <div class="title">Certificado de antecedentes</div>
+            <div class="desc">Paso a paso para obtener tu certificado de antecedentes.</div>
+            <span class="tag">Policía Nacional</span>
+          </div>
+        </div>
+
+        <div class="video-card" data-track="click_video" data-track-label="Solicitar visa de turismo"
+             data-keywords="visa,turismo,viaje,cancillería,migración" onclick="openVideoModal('visa')">
+          <div class="video-thumb" style="background: linear-gradient(135deg,#f97316,#fb923c);">
+            <span class="duration">7:45</span>
+            <div class="play-btn"><svg viewBox="0 0 24 24" fill="#f97316"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+          <div class="video-info">
+            <div class="title">Solicitar visa de turismo</div>
+            <div class="desc">Guía completa para solicitar tu visa de turismo.</div>
+            <span class="tag">Cancillería</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PROFESIONALES -->
+    <section class="card section" id="profesionales">
+      <div class="section-head">
+        <h2>Profesionales para tu trámite</h2>
+        <a href="#" data-track="click_ver_todos_profesionales">Ver todos los profesionales</a>
+      </div>
+      <div class="pro-grid">
+
+        <div class="pro-card" data-keywords="abogada,notarial,civil,maria,fernanda,lópez">
+          <div class="pro-head">
+            <div class="pro-avatar" style="background:#ec4899;">ML</div>
+            <div>
+              <div class="pro-name">María Fernanda López</div>
+              <div class="pro-role">Abogada</div>
+            </div>
+          </div>
+          <div class="pro-desc">Especialista en trámites notariales y civiles.</div>
+          <div class="pro-rating">⭐ 4.9 (124) <span><span class="dot-available"></span>Disponible</span></div>
+          <button class="btn-outline" data-track="click_ver_perfil" data-track-label="María Fernanda López" onclick="openProfile('maria')">Ver perfil</button>
+        </div>
+
+        <div class="pro-card" data-keywords="contador,sri,ruc,contabilidad,juan,pablo,martínez">
+          <div class="pro-head">
+            <div class="pro-avatar" style="background:#5b4fe3;">JM</div>
+            <div>
+              <div class="pro-name">Juan Pablo Martínez</div>
+              <div class="pro-role">Contador Público</div>
+            </div>
+          </div>
+          <div class="pro-desc">Experto en trámites del SRI, RUC y contabilidad.</div>
+          <div class="pro-rating">⭐ 4.8 (98) <span><span class="dot-available"></span>Disponible</span></div>
+          <button class="btn-outline" data-track="click_ver_perfil" data-track-label="Juan Pablo Martínez" onclick="openProfile('juan')">Ver perfil</button>
+        </div>
+
+        <div class="pro-card" data-keywords="gestora,tránsito,licencias,permisos,ana,sofía,gómez">
+          <div class="pro-head">
+            <div class="pro-avatar" style="background:#16a34a;">AG</div>
+            <div>
+              <div class="pro-name">Ana Sofía Gómez</div>
+              <div class="pro-role">Gestora Administrativa</div>
+            </div>
+          </div>
+          <div class="pro-desc">Trámites de tránsito, licencias y permisos.</div>
+          <div class="pro-rating">⭐ 4.7 (76) <span><span class="dot-available"></span>Disponible</span></div>
+          <button class="btn-outline" data-track="click_ver_perfil" data-track-label="Ana Sofía Gómez" onclick="openProfile('ana')">Ver perfil</button>
+        </div>
+
+        <div class="pro-card" data-keywords="visa,migración,migratorio,david,morales">
+          <div class="pro-head">
+            <div class="pro-avatar" style="background:#f97316;">DM</div>
+            <div>
+              <div class="pro-name">David Morales</div>
+              <div class="pro-role">Abogado Migratorio</div>
+            </div>
+          </div>
+          <div class="pro-desc">Visas, permisos y trámites migratorios.</div>
+          <div class="pro-rating">⭐ 4.9 (112) <span><span class="dot-available"></span>Disponible</span></div>
+          <button class="btn-outline" data-track="click_ver_perfil" data-track-label="David Morales" onclick="openProfile('david')">Ver perfil</button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="card features">
+      <div class="feature">
+        <div class="feature-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#5b4fe3" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/></svg></div>
+        <div><div class="feature-title">Profesionales verificados</div><div class="feature-sub">Pasan por un proceso de verificación.</div></div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#5b4fe3" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+        <div><div class="feature-title">Disponible 24/7</div><div class="feature-sub">Encuentra ayuda cuando lo necesites.</div></div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#5b4fe3" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M4 9h16"/></svg></div>
+        <div><div class="feature-title">Ahorra tiempo y dinero</div><div class="feature-sub">Realiza tus trámites de forma rápida y segura.</div></div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#5b4fe3" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div><div class="feature-title">Soporte personalizado</div><div class="feature-sub">Te acompañamos hasta finalizar tu trámite.</div></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <div class="card">
+      <h3>Mi perfil</h3>
+      <div class="profile-box">
+        <div class="profile-avatar" id="sideAvatar">CR</div>
+        <div>
+          <div class="profile-name" id="sideName">Carlos Ramírez</div>
+          <div class="profile-email" id="sideEmail">carlos.ramirez@email.com</div>
+        </div>
+      </div>
+      <a href="#" data-track="click_ver_mi_perfil" onclick="openMyProfile(); return false;">Ver mi perfil</a>
+
+      <div class="menu-item" data-track="click_mis_tramites" onclick="openMyProcedures()">
+        <div class="menu-icon" style="background:#eef0ff; color:#5b4fe3;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+        </div>
+        <div><div class="menu-title">Mis trámites</div><div class="menu-sub">Consulta el estado de tus trámites</div></div>
+      </div>
+      <div class="menu-item" data-track="click_mensajes_sidebar" onclick="openMessages()">
+        <div class="menu-icon" style="background:#fde8e8; color:#ef4444;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div><div class="menu-title">Mensajes</div><div class="menu-sub">Conversaciones con profesionales</div></div>
+        <span class="menu-badge">2</span>
+      </div>
+      <div class="menu-item" data-track="click_favoritos" onclick="openFavorites()">
+        <div class="menu-icon" style="background:#fff1e6; color:#f97316;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+        </div>
+        <div><div class="menu-title">Favoritos</div><div class="menu-sub">Profesionales y trámites guardados</div></div>
+      </div>
+      <div class="menu-item" data-track="click_configuracion" onclick="openSettings()">
+        <div class="menu-icon" style="background:#eef0ff; color:#5b4fe3;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3h0a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5h0a1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9v0a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+        </div>
+        <div><div class="menu-title">Configuración</div><div class="menu-sub">Preferencias de la cuenta</div></div>
+      </div>
+    </div>
+
+    <div class="card help-card">
+      <h3>¿Necesitas ayuda?</h3>
+      <p>Estamos aquí para ayudarte</p>
+      <button class="btn-primary" style="width:100%; justify-content:center;" data-track="click_chatear_ahora" onclick="openChat()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Chatear ahora
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="secure-row">
+        <div class="menu-icon" style="background:#e8f7ee; color:#16a34a;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/></svg>
+        </div>
+        <div><div class="menu-title">Plataforma segura</div><div class="menu-sub">Profesionales verificados y datos protegidos</div></div>
+      </div>
+    </div>
+
+    <div class="card cta-card" style="padding: 20px;">
+      <h3>¿Qué trámite necesitas?</h3>
+      <p style="font-size:12.5px; color:var(--text-muted); margin:0 0 14px;">Encuentra al profesional ideal para ayudarte.</p>
+      <button class="btn-primary" style="width:100%; justify-content:center;" data-track="click_publicar_tramite" onclick="openPublishForm()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+        Publicar mi trámite
+      </button>
+      <p class="small">Es gratis y sin compromiso</p>
+    </div>
+
+  </aside>
+</div>
+
+<!-- MODAL Y TOAST (genéricos, los reutiliza interactions.js) -->
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this) closeModal()">
+  <div class="modal-box" id="modalBox"></div>
+</div>
+<div id="toast" class="toast"></div>
+
+<script src="{{ url_for('static', filename='js/session.js') }}"></script>
+<script src="{{ url_for('static', filename='js/tracking.js') }}"></script>
+<script src="{{ url_for('static', filename='js/interactions.js') }}"></script>
+</body>
+</html>
