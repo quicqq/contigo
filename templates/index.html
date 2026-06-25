@@ -27,11 +27,11 @@
     <a href="#" data-track="click_blog">Blog</a>
   </nav>
   <div class="topbar-right">
-    <button class="icon-btn" data-track="click_notificaciones" aria-label="Notificaciones">
+    <button class="icon-btn" data-track="click_notificaciones" aria-label="Notificaciones" onclick="openNotifications()">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1e1b2e" stroke-width="2"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
       <span class="badge"></span>
     </button>
-    <button class="icon-btn" data-track="click_mensajes" aria-label="Mensajes">
+    <button class="icon-btn" data-track="click_mensajes" aria-label="Mensajes" onclick="openMessages()">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1e1b2e" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
     </button>
     <div class="user-pill">
@@ -51,19 +51,20 @@
         <h1>Hacemos tus trámites <span class="accent">más simples, juntos.</span></h1>
         <p>Conecta con profesionales verificados que te ayudan a realizar cualquier trámite, en todo momento.</p>
         <div class="search-row">
-          <input type="text" placeholder="¿Qué trámite necesitas realizar?" data-track="usa_buscador" />
-          <button class="btn-primary" data-track="click_buscar">
+          <input type="text" id="searchInput" placeholder="¿Qué trámite necesitas realizar?" data-track="usa_buscador" onkeydown="if(event.key==='Enter') runSearch()" />
+          <button class="btn-primary" data-track="click_buscar" onclick="runSearch()">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
             Buscar
           </button>
         </div>
         <div class="popular">
           Búsquedas populares:
-          <span class="chip" data-track="click_busqueda_popular" data-track-label="Licencia de conducción">Licencia de conducción</span>
-          <span class="chip" data-track="click_busqueda_popular" data-track-label="Pensión">Pensión</span>
-          <span class="chip" data-track="click_busqueda_popular" data-track-label="RUC">RUC</span>
-          <span class="chip" data-track="click_busqueda_popular" data-track-label="Visa">Visa</span>
+          <span class="chip" data-track="click_busqueda_popular" data-track-label="Licencia de conducción" onclick="quickSearch('licencia de conducción')">Licencia de conducción</span>
+          <span class="chip" data-track="click_busqueda_popular" data-track-label="Pensión" onclick="quickSearch('pensión')">Pensión</span>
+          <span class="chip" data-track="click_busqueda_popular" data-track-label="RUC" onclick="quickSearch('ruc')">RUC</span>
+          <span class="chip" data-track="click_busqueda_popular" data-track-label="Visa" onclick="quickSearch('visa')">Visa</span>
         </div>
+        <div id="searchBanner" class="search-banner" style="display:none;"></div>
       </div>
       <div class="hero-illustration">
         <svg viewBox="0 0 320 260" xmlns="http://www.w3.org/2000/svg">
@@ -88,7 +89,8 @@
       </div>
       <div class="video-grid">
 
-        <div class="video-card" data-track="click_video" data-track-label="Cómo sacar el RUC">
+        <div class="video-card" data-track="click_video" data-track-label="Cómo sacar el RUC"
+             data-keywords="ruc,sri,impuestos,contribuyente" onclick="openVideoModal('ruc')">
           <div class="video-thumb" style="background: linear-gradient(135deg,#5b4fe3,#8b7ff0);">
             <span class="duration">4:35</span>
             <div class="play-btn"><svg viewBox="0 0 24 24" fill="#5b4fe3"><path d="M8 5v14l11-7z"/></svg></div>
@@ -100,7 +102,8 @@
           </div>
         </div>
 
-        <div class="video-card" data-track="click_video" data-track-label="Renovar licencia de conducción">
+        <div class="video-card" data-track="click_video" data-track-label="Renovar licencia de conducción"
+             data-keywords="licencia,conducción,tránsito,manejar" onclick="openVideoModal('licencia')">
           <div class="video-thumb" style="background: linear-gradient(135deg,#1e1b2e,#3f3a55);">
             <span class="duration">6:12</span>
             <div class="play-btn"><svg viewBox="0 0 24 24" fill="#1e1b2e"><path d="M8 5v14l11-7z"/></svg></div>
@@ -112,7 +115,8 @@
           </div>
         </div>
 
-        <div class="video-card" data-track="click_video" data-track-label="Certificado de antecedentes">
+        <div class="video-card" data-track="click_video" data-track-label="Certificado de antecedentes"
+             data-keywords="certificado,antecedentes,penales,policía" onclick="openVideoModal('antecedentes')">
           <div class="video-thumb" style="background: linear-gradient(135deg,#16a34a,#4ade80);">
             <span class="duration">5:08</span>
             <div class="play-btn"><svg viewBox="0 0 24 24" fill="#16a34a"><path d="M8 5v14l11-7z"/></svg></div>
@@ -124,7 +128,8 @@
           </div>
         </div>
 
-        <div class="video-card" data-track="click_video" data-track-label="Solicitar visa de turismo">
+        <div class="video-card" data-track="click_video" data-track-label="Solicitar visa de turismo"
+             data-keywords="visa,turismo,viaje,cancillería,migración" onclick="openVideoModal('visa')">
           <div class="video-thumb" style="background: linear-gradient(135deg,#f97316,#fb923c);">
             <span class="duration">7:45</span>
             <div class="play-btn"><svg viewBox="0 0 24 24" fill="#f97316"><path d="M8 5v14l11-7z"/></svg></div>
@@ -147,7 +152,7 @@
       </div>
       <div class="pro-grid">
 
-        <div class="pro-card">
+        <div class="pro-card" data-keywords="abogada,notarial,civil,maria,fernanda,lópez">
           <div class="pro-head">
             <div class="pro-avatar" style="background:#ec4899;">ML</div>
             <div>
@@ -157,10 +162,10 @@
           </div>
           <div class="pro-desc">Especialista en trámites notariales y civiles.</div>
           <div class="pro-rating">⭐ 4.9 (124) <span><span class="dot-available"></span>Disponible</span></div>
-          <button class="btn-outline" data-track="click_ver_perfil" data-track-label="María Fernanda López">Ver perfil</button>
+          <button class="btn-outline" data-track="click_ver_perfil" data-track-label="María Fernanda López" onclick="openProfile('maria')">Ver perfil</button>
         </div>
 
-        <div class="pro-card">
+        <div class="pro-card" data-keywords="contador,sri,ruc,contabilidad,juan,pablo,martínez">
           <div class="pro-head">
             <div class="pro-avatar" style="background:#5b4fe3;">JM</div>
             <div>
@@ -170,10 +175,10 @@
           </div>
           <div class="pro-desc">Experto en trámites del SRI, RUC y contabilidad.</div>
           <div class="pro-rating">⭐ 4.8 (98) <span><span class="dot-available"></span>Disponible</span></div>
-          <button class="btn-outline" data-track="click_ver_perfil" data-track-label="Juan Pablo Martínez">Ver perfil</button>
+          <button class="btn-outline" data-track="click_ver_perfil" data-track-label="Juan Pablo Martínez" onclick="openProfile('juan')">Ver perfil</button>
         </div>
 
-        <div class="pro-card">
+        <div class="pro-card" data-keywords="gestora,tránsito,licencias,permisos,ana,sofía,gómez">
           <div class="pro-head">
             <div class="pro-avatar" style="background:#16a34a;">AG</div>
             <div>
@@ -183,10 +188,10 @@
           </div>
           <div class="pro-desc">Trámites de tránsito, licencias y permisos.</div>
           <div class="pro-rating">⭐ 4.7 (76) <span><span class="dot-available"></span>Disponible</span></div>
-          <button class="btn-outline" data-track="click_ver_perfil" data-track-label="Ana Sofía Gómez">Ver perfil</button>
+          <button class="btn-outline" data-track="click_ver_perfil" data-track-label="Ana Sofía Gómez" onclick="openProfile('ana')">Ver perfil</button>
         </div>
 
-        <div class="pro-card">
+        <div class="pro-card" data-keywords="visa,migración,migratorio,david,morales">
           <div class="pro-head">
             <div class="pro-avatar" style="background:#f97316;">DM</div>
             <div>
@@ -196,7 +201,7 @@
           </div>
           <div class="pro-desc">Visas, permisos y trámites migratorios.</div>
           <div class="pro-rating">⭐ 4.9 (112) <span><span class="dot-available"></span>Disponible</span></div>
-          <button class="btn-outline" data-track="click_ver_perfil" data-track-label="David Morales">Ver perfil</button>
+          <button class="btn-outline" data-track="click_ver_perfil" data-track-label="David Morales" onclick="openProfile('david')">Ver perfil</button>
         </div>
 
       </div>
@@ -236,28 +241,28 @@
           <div class="profile-email">carlos.ramirez@email.com</div>
         </div>
       </div>
-      <a href="#" data-track="click_ver_mi_perfil">Ver mi perfil</a>
+      <a href="#" data-track="click_ver_mi_perfil" onclick="openMyProfile(); return false;">Ver mi perfil</a>
 
-      <div class="menu-item" data-track="click_mis_tramites">
+      <div class="menu-item" data-track="click_mis_tramites" onclick="openMyProcedures()">
         <div class="menu-icon" style="background:#eef0ff; color:#5b4fe3;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
         </div>
         <div><div class="menu-title">Mis trámites</div><div class="menu-sub">Consulta el estado de tus trámites</div></div>
       </div>
-      <div class="menu-item" data-track="click_mensajes_sidebar">
+      <div class="menu-item" data-track="click_mensajes_sidebar" onclick="openMessages()">
         <div class="menu-icon" style="background:#fde8e8; color:#ef4444;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         </div>
         <div><div class="menu-title">Mensajes</div><div class="menu-sub">Conversaciones con profesionales</div></div>
         <span class="menu-badge">2</span>
       </div>
-      <div class="menu-item" data-track="click_favoritos">
+      <div class="menu-item" data-track="click_favoritos" onclick="openFavorites()">
         <div class="menu-icon" style="background:#fff1e6; color:#f97316;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
         </div>
         <div><div class="menu-title">Favoritos</div><div class="menu-sub">Profesionales y trámites guardados</div></div>
       </div>
-      <div class="menu-item" data-track="click_configuracion">
+      <div class="menu-item" data-track="click_configuracion" onclick="openSettings()">
         <div class="menu-icon" style="background:#eef0ff; color:#5b4fe3;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3h0a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5h0a1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9v0a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
         </div>
@@ -268,7 +273,7 @@
     <div class="card help-card">
       <h3>¿Necesitas ayuda?</h3>
       <p>Estamos aquí para ayudarte</p>
-      <button class="btn-primary" style="width:100%; justify-content:center;" data-track="click_chatear_ahora">
+      <button class="btn-primary" style="width:100%; justify-content:center;" data-track="click_chatear_ahora" onclick="openChat()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         Chatear ahora
       </button>
@@ -286,7 +291,7 @@
     <div class="card cta-card" style="padding: 20px;">
       <h3>¿Qué trámite necesitas?</h3>
       <p style="font-size:12.5px; color:var(--text-muted); margin:0 0 14px;">Encuentra al profesional ideal para ayudarte.</p>
-      <button class="btn-primary" style="width:100%; justify-content:center;" data-track="click_publicar_tramite">
+      <button class="btn-primary" style="width:100%; justify-content:center;" data-track="click_publicar_tramite" onclick="openPublishForm()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
         Publicar mi trámite
       </button>
@@ -296,6 +301,13 @@
   </aside>
 </div>
 
+<!-- MODAL Y TOAST (genéricos, los reutiliza interactions.js) -->
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this) closeModal()">
+  <div class="modal-box" id="modalBox"></div>
+</div>
+<div id="toast" class="toast"></div>
+
 <script src="{{ url_for('static', filename='js/tracking.js') }}"></script>
+<script src="{{ url_for('static', filename='js/interactions.js') }}"></script>
 </body>
 </html>
