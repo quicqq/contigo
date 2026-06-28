@@ -6,12 +6,29 @@ construir analítica desde cero cada vez.
 
 ## Qué incluye
 
-- `app.py` — servidor Flask: sirve la landing, recibe eventos y muestra el dashboard.
-- `templates/index.html` — la landing (vista de usuario que busca un trámite).
-- `templates/dashboard.html` — panel donde ves los resultados de las pruebas.
-- `static/js/tracking.js` — script que registra automáticamente cualquier clic
-  en un elemento con el atributo `data-track="nombre_del_evento"`.
+- `app.py` — servidor Flask con 3 vistas: landing, usuario y experto, más el tracking y el dashboard.
+- `templates/landing.html` — **página de inicio**: portada + selección de rol (usuario / experto) + registro falso.
+- `templates/usuario.html` — vista de la persona que busca un trámite (la que ya tenías).
+- `templates/experto.html` — **nuevo**: panel del experto/asesor (ofertar servicios, ver solicitudes, reputación).
+- `templates/dashboard.html` — panel donde ves los resultados de las pruebas (`/dashboard`).
+- `static/js/auth.js` — modal de registro falso (común + campos extra de experto).
+- `static/js/session.js` — aplica el nombre/rol guardado del registro a `usuario.html` y `experto.html`.
+- `static/js/interactions.js` — interactividad de `usuario.html` (búsqueda, perfiles, chat, etc.).
+- `static/js/experto.js` — interactividad de `experto.html` (publicar servicios, responder solicitudes).
+- `static/img/portada.png` — la imagen de portada que subiste.
 - `events.db` — base SQLite donde se guardan los eventos (se crea sola al arrancar).
+
+## Cómo funciona el flujo
+
+1. Entras a `/` (la landing con la portada).
+2. Eliges "Soy persona natural" o "Soy experto / asesor" → se abre el modal de registro falso.
+   - Ambos roles piden: nombre, usuario, correo, contraseña.
+   - Si eliges experto, además pide: profesión, años de experiencia, descripción y "subir título SENESCYT" (no se sube de verdad a ningún lado — es solo para que el flujo se sienta completo).
+3. Al "crear cuenta", te lleva a `/usuario` o `/experto` según el rol, y ese nombre queda guardado en el navegador (sessionStorage) para personalizar saludo y perfil.
+4. Desde cualquiera de esas dos vistas, el ícono de flecha junto a tu nombre te regresa a `/`.
+
+Nota: el registro es 100% simulado (no hay base de usuarios real ni contraseñas guardadas en serio). Es justo lo que necesitas para un prototipo de validación — si más adelante quieres cuentas reales, ahí sí conviene una base de datos y autenticación de verdad.
+
 
 ## Cómo correrlo en tu máquina
 
