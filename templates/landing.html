@@ -10,36 +10,45 @@
 </head>
 <body class="landing-body">
 
-<div class="landing-hero">
-  <img src="{{ url_for('static', filename='img/portada.png') }}" alt="ContiGO" class="landing-hero-img">
+<div class="bg-animated">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+  <div class="bg-dots"></div>
 </div>
 
-<main class="landing-main">
-  <div class="landing-intro">
-    <h2>¿Cómo quieres entrar?</h2>
-    <p>Elige el perfil que mejor te describe. Puedes crear los dos si quieres probar ambas experiencias.</p>
-  </div>
+<main class="landing-stage">
+  <div class="landing-card">
 
-  <div class="role-grid">
+    <div class="landing-logo">
+      <svg width="56" height="40" viewBox="0 0 90 60" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="22" cy="14" r="9" fill="#ffffff"/>
+        <circle cx="48" cy="14" r="9" fill="#8bb4ff"/>
+        <path d="M14 38c0-9 7-16 16-16s12 8 17 8 9-8 16-8 16 7 16 16-7 16-16 16-12-8-17-8-9 8-16 8-16-7-16-16z"
+              fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>
+        <path d="M14 38c0-9 7-16 16-16s12 8 17 8 9-8 16-8 16 7 16 16-7 16-16 16-12-8-17-8-9 8-16 8-16-7-16-16z"
+              fill="none" stroke="#8bb4ff" stroke-width="6" stroke-linecap="round" stroke-dasharray="60 200"/>
+      </svg>
+      <div class="logo-text">Conti<span>GO</span></div>
+    </div>
+    <p class="landing-tagline">Hacemos tus trámites más simples, juntos.</p>
 
-    <div class="role-card" data-track="click_rol_usuario" onclick="openRegister('usuario')">
-      <div class="role-icon" style="background:#eef0ff; color:#5b4fe3;">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/></svg>
-      </div>
-      <h3>Soy persona natural</h3>
-      <p>Busco ayuda para completar un trámite: licencias, RUC, visas, certificados y más.</p>
-      <button class="btn-primary" style="width:100%; justify-content:center;">Ingresar como usuario</button>
+    <div class="landing-actions">
+      <button class="btn-landing btn-landing-primary" data-track="click_crear_cuenta" onclick="openAuthChoice('register')">
+        Crear cuenta
+      </button>
+      <button class="btn-landing btn-landing-outline" data-track="click_iniciar_sesion" onclick="openAuthChoice('login')">
+        Iniciar sesión
+      </button>
     </div>
 
-    <div class="role-card" data-track="click_rol_experto" onclick="openRegister('experto')">
-      <div class="role-icon" style="background:#e8f7ee; color:#16a34a;">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
-      </div>
-      <h3>Soy experto / asesor</h3>
-      <p>Abogado, contador, economista o auditor. Quiero ofrecer mis servicios y ayudar con trámites.</p>
-      <button class="btn-primary" style="width:100%; justify-content:center; background:#16a34a;">Crear perfil de experto</button>
+    <div class="landing-features">
+      <span>✓ Profesionales verificados</span>
+      <span>🕐 Ahorra tiempo</span>
+      <span>🔒 Trámites seguros</span>
+      <span>🤝 Estamos contigo en cada paso</span>
     </div>
-
   </div>
 </main>
 
@@ -51,5 +60,6 @@
 
 <script src="{{ url_for('static', filename='js/tracking.js') }}"></script>
 <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+<script src="{{ url_for('static', filename='js/landing.js') }}"></script>
 </body>
 </html>
