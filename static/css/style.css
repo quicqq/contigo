@@ -297,38 +297,84 @@ button { font-family: inherit; cursor: pointer; }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
 /* ============================================================
-   LANDING (portada + selección de rol)
+   LANDING — fondo animado + tarjeta central
    ============================================================ */
-.landing-body { background: #0b1228; }
-
-.landing-hero { width: 100%; line-height: 0; }
-.landing-hero-img { width: 100%; display: block; object-fit: cover; max-height: 640px; }
-
-.landing-main {
-  max-width: 1000px; margin: 0 auto; padding: 48px 24px 80px;
-  background: var(--bg); border-radius: 28px 28px 0 0; margin-top: -28px; position: relative;
+.landing-body {
+  margin: 0; min-height: 100vh; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  background: #0b1228;
 }
-.landing-intro { text-align: center; margin-bottom: 34px; }
-.landing-intro h2 { font-family: "Sora", sans-serif; font-size: 26px; margin: 0 0 8px; }
-.landing-intro p { color: var(--text-muted); font-size: 14.5px; margin: 0; }
 
-.role-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
-.role-card {
-  background: white; border: 1px solid var(--border); border-radius: 16px; padding: 28px;
-  cursor: pointer; transition: transform .15s, box-shadow .15s;
+.bg-animated {
+  position: fixed; inset: 0; z-index: 0; overflow: hidden;
+  background: linear-gradient(160deg, #0b1228 0%, #141b3d 55%, #1b2150 100%);
 }
-.role-card:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(30,27,46,0.1); }
-.role-icon {
-  width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center;
-  margin-bottom: 16px;
+.blob {
+  position: absolute; border-radius: 50%; filter: blur(70px); will-change: transform;
 }
-.role-card h3 { font-family: "Sora", sans-serif; font-size: 18px; margin: 0 0 8px; }
-.role-card p { color: var(--text-muted); font-size: 13.5px; line-height: 1.5; margin: 0 0 18px; min-height: 58px; }
+.blob1 { width: 440px; height: 440px; background: #5b4fe3; opacity: .55; top: -100px; left: -80px; animation: drift1 22s ease-in-out infinite alternate; }
+.blob2 { width: 400px; height: 400px; background: #8b7ff0; opacity: .45; bottom: -120px; right: -90px; animation: drift2 27s ease-in-out infinite alternate; }
+.blob3 { width: 280px; height: 280px; background: #16a34a; opacity: .3; top: 42%; left: 58%; animation: drift3 19s ease-in-out infinite alternate; }
+.blob4 { width: 220px; height: 220px; background: #f97316; opacity: .22; bottom: 12%; left: 6%; animation: drift1 31s ease-in-out infinite alternate-reverse; }
 
-@media (max-width: 720px) {
-  .role-grid { grid-template-columns: 1fr; }
-  .landing-main { padding: 36px 18px 60px; }
+@keyframes drift1 { from { margin: 0 0; } to { margin: 36px 46px; } }
+@keyframes drift2 { from { margin: 0 0; } to { margin: -46px -24px; } }
+@keyframes drift3 { from { margin: 0 0; } to { margin: -40px 28px; } }
+
+.bg-dots {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.08) 1.4px, transparent 1.4px);
+  background-size: 26px 26px;
+  opacity: .5;
 }
+
+.landing-stage { position: relative; z-index: 1; padding: 24px; }
+.landing-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  backdrop-filter: blur(14px);
+  border-radius: 24px;
+  padding: 48px 44px;
+  max-width: 460px;
+  text-align: center;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+}
+
+.landing-logo { display: flex; flex-direction: column; align-items: center; gap: 6px; margin-bottom: 6px; }
+.logo-text { font-family: "Sora", sans-serif; font-weight: 800; font-size: 34px; color: white; letter-spacing: -0.5px; }
+.logo-text span { color: #8bb4ff; }
+.landing-tagline { color: rgba(255,255,255,0.75); font-size: 14.5px; margin: 0 0 30px; }
+
+.landing-actions { display: flex; flex-direction: column; gap: 12px; margin-bottom: 26px; }
+.btn-landing {
+  width: 100%; padding: 14px; border-radius: 12px; font-weight: 600; font-size: 15px;
+  cursor: pointer; transition: transform .12s, background .15s, border-color .15s;
+}
+.btn-landing:hover { transform: translateY(-1px); }
+.btn-landing-primary { background: linear-gradient(135deg, #5b4fe3, #8b7ff0); color: white; border: none; }
+.btn-landing-outline { background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.35); }
+.btn-landing-outline:hover { border-color: white; }
+
+.landing-features {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 16px;
+  font-size: 12px; color: rgba(255,255,255,0.6);
+}
+
+@media (max-width: 480px) {
+  .landing-card { padding: 36px 26px; }
+  .logo-text { font-size: 28px; }
+}
+
+/* ---------- Selección de rol dentro del modal (registro / login) ---------- */
+.role-choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 6px; }
+.role-choice-card {
+  border: 1px solid var(--border); border-radius: 12px; padding: 18px 14px; text-align: center;
+  cursor: pointer; transition: border-color .15s, transform .15s;
+}
+.role-choice-card:hover { border-color: var(--primary); transform: translateY(-2px); }
+.role-choice-card .role-icon { margin: 0 auto 10px; }
+.role-choice-card h4 { font-size: 14px; margin: 0 0 4px; font-family: "Sora", sans-serif; }
+.role-choice-card p { font-size: 12px; color: var(--text-muted); margin: 0; line-height: 1.4; }
 
 /* ---------- Subida de archivo (título SENESCYT) ---------- */
 .file-upload {
